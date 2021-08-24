@@ -40,8 +40,8 @@ const Chart = ({ salesData, selectedChart }) => {
       backgroundColor: "#5a6e7f",
     },
   };
-  console.log(options.title);
-  let Charts = <h1>No Chart Selected</h1>;
+
+  let Charts = <h1>Plaese Select Chart</h1>;
   if (selectedChart.length > 0) {
     if (selectedChart === "PieChart") {
       Charts = <Pie data={chartData} options={options} />;
@@ -49,7 +49,7 @@ const Chart = ({ salesData, selectedChart }) => {
       Charts = <Doughnut data={chartData} options={options} />;
     }
   }
-  return <div style={{ width: "50%" }}>{Charts}</div>;
+  return <div style={{ width: 400 }}>{Charts}</div>;
 };
 
 export default Chart;

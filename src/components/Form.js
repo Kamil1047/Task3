@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button } from "reactstrap";
 
 const Form = (props) => {
   const [fetchData, setFetchData] = useState({
@@ -16,8 +17,8 @@ const Form = (props) => {
     };
 
     props.onAddSales(salesData);
-    props.selectedChart(selectedChart);
   };
+  props.selectedChart(selectedChart);
   //console.log(selectedChart);
   return (
     <div>
@@ -59,16 +60,19 @@ const Form = (props) => {
             required
           />
         </div>
-        <div>
-          <label>Chart: </label>
-          <select onChange={(e) => setSelectedCHart(e.target.value)}>
-            <option value="">--Select Chart--</option>
-            <option value="PieChart">Pie Chart </option>
-            <option value="DoughnutChart">Doughnut Chart</option>
-          </select>
-        </div>
-        <button type="submit">Submit</button>
+
+        <Button color="primary" type="submit">
+          Submit
+        </Button>
       </form>
+      <div>
+        <label>Chart: </label>
+        <select onChange={(e) => setSelectedCHart(e.target.value)}>
+          <option value="">--Select Chart--</option>
+          <option value="PieChart">Pie Chart </option>
+          <option value="DoughnutChart">Doughnut Chart</option>
+        </select>
+      </div>
     </div>
   );
 };
