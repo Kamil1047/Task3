@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Form from "./components/Form";
+import "./App.css";
+import Chart from "./components/Chart";
 
-function App() {
+const App = () => {
+  const [salesData, setSalesData] = useState([]);
+  const [selectedCHart, setSelectedChart] = useState("");
+
+  const onAddSales = (sales) => {
+    setSalesData((prevSalesData) => {
+      const updatedSalesData = [...prevSalesData];
+      updatedSalesData.push({ month: sales.month, sales: sales.sales });
+      return updatedSalesData;
+    });
+  };
+
+  const selectedChart = (selectdChart) => {
+    setSelectedChart(selectdChart);
+  };
+
+  let content = <h1>No Data Found</h1>;
+
+  if (salesData.length > 0) {
+    content = <Chart salesData={salesData} selectedChart={selectedCHart} />;
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Form onAddSales={onAddSales} selectedChart={selectedChart} />
+      {content}
     </div>
   );
-}
+};
 
 export default App;
