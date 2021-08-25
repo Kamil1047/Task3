@@ -1,28 +1,21 @@
 import React, { useState } from "react";
 import { Button } from "reactstrap";
 
-const Form = (props) => {
-  const [fetchData, setFetchData] = useState({
-    month: "",
-    sales: "",
-  });
-
-  const [selectedChart, setSelectedCHart] = useState("");
+const Form = ({onAddSales, selectedChart}) => {
+  const [fetchData, setFetchData] = useState([]);
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
     const salesData = {
       month: fetchData.month,
-      sales: +fetchData.sales,
+      sales: parseInt(fetchData.sales),
     };
-
-    props.onAddSales(salesData);
+    onAddSales(salesData);
+    document.chartForm.reset();
   };
-  props.selectedChart(selectedChart);
-  //console.log(selectedChart);
   return (
     <div>
-      <form onSubmit={formSubmitHandler}>
+      <form name="chartForm" onSubmit={formSubmitHandler}>
         <div>
           <label>Month: </label>
           <select
@@ -67,10 +60,11 @@ const Form = (props) => {
       </form>
       <div>
         <label>Chart: </label>
-        <select onChange={(e) => setSelectedCHart(e.target.value)}>
+        <select onChange={(e) => selectedChart(e.target.value)}>
           <option value="">--Select Chart--</option>
           <option value="PieChart">Pie Chart </option>
           <option value="DoughnutChart">Doughnut Chart</option>
+          <option value="BarChart">Bar Chart</option>
         </select>
       </div>
     </div>
